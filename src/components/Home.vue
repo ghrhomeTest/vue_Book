@@ -10,7 +10,7 @@
             <Button type="primary" @click="handleSubmit('formInline')">登录</Button>
         </FormItem>
         <Button type="primary" @click="showModal()">显示遮罩层</Button>
-        <Xmodal :modal="xmodal" @toggleEvent="colseModal()"></Xmodal>
+        <Xmodal :modal="xmodal" @toggleEvent="colseModal()" :userId="formInline.user" :password="formInline.password"></Xmodal>
     </Form>
 </template>
 <script>

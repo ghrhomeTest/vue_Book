@@ -1,17 +1,16 @@
 <template>
     <Modal
         v-model="modal1"
-        title="Common Modal dialog box title"
+        title="输入的信息"
         @on-ok="ok"
         @on-cancel="cancel">
-        <p>Content of dialog</p>
-        <p>Content of dialog</p>
-        <p>Content of dialog</p>
+        <p>用户名：{{userId}}</p>
+        <p>密码：{{password}}</p>
     </Modal>
 </template>
 <script>
 export default {
-    props: ["modal"],
+    props: ["modal","userId","password"],
   data() {
     return {
       modal1: false
