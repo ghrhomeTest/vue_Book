@@ -1,6 +1,6 @@
 <template>
   <div class="listContainer">
-    <Col span="5" offset="1" v-for="book in books" class="text">
+    <Col span="5" offset="1" v-for="book in books" class="text" :key="book">
     <Card >
       <p slot="title">{{book.bookName}}</p>
       <img  class="bookimg" :src="book.imgUrl" alt="">

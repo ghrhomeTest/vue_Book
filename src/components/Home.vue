@@ -1,26 +1,67 @@
 <template>
-  <Carousel autoplay>
-    <Carousel-item>
-      <div class="demo-carousel"><img src="http://www.cnidea.net/toutiao/u/20161231/163651156016069525738.jpg" alt=""></div>
-    </Carousel-item>
-    <Carousel-item>
-      <div class="demo-carousel">欢迎来到Vue书店</div>
-    </Carousel-item>
-  </Carousel>
+    <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
+        <FormItem prop="user">
+             <InputNumber :max="100" :min="0" :step="1" v-model="formInline.user"></InputNumber>
+        </FormItem>
+        <FormItem prop="password">
+           <InputNumber :max="100" :min="0" :step="1" v-model="formInline.password"></InputNumber>
+        </FormItem>
+        <FormItem>
+            <Button type="primary" @click="handleSubmit('formInline')">登录</Button>
+        </FormItem>
+        <Button type="primary" @click="showModal()">显示遮罩层</Button>
+        <Xmodal :modal="xmodal" @toggleEvent="colseModal()"></Xmodal>
+    </Form>
 </template>
 <script>
-  export default{name: 'Home'}
+import Xmodal from "@/components/modal";
+export default {
+  data() {
+    const user = (rule, value, callback) => {
+      if (value == 0) {
+        callback(new Error("用户名不能为空"));
+      } else {
+        callback();
+      }
+    };
+    const password = (rule, value, callback) => {
+      if (value == 0) {
+        callback(new Error("密码不能为空"));
+      } else {
+        callback();
+      }
+    };
+    return {
+      xmodal: false,
+      formInline: {
+        user: 0,
+        password: 0
+      },
+      ruleInline: {
+        user: [{ required: true, validator: user, trigger: "change" }],
+        password: [{ required: true, validator: password, trigger: "change" }]
+      }
+    };
+  },
+  components: {
+    Xmodal
+  },
+  methods: {
+    handleSubmit(name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          this.$Message.success("Success!");
+        } else {
+          this.$Message.error("Fail!");
+        }
+      });
+    },
+    showModal() {
+            this.xmodal = true; 
+    },
+    colseModal(){
+         this.xmodal = false;
+    }
+  }
+};
 </script>
-<style>
-  .demo-carousel {
-    width: 100%;
-    height: 600px;
-    font-size: 40px;
-  }
-  img {
-    width: 100%;
-    height:600px;
-  }
-
-</style>
-

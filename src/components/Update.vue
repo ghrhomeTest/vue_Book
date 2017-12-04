@@ -1,6 +1,6 @@
 <template>
   <div class="listContainer">
-    <Col span="5" offset="1" v-for="book in books" class="text">
+    <Col span="5" offset="1" v-for="book in books" class="text" :key="book">
     <Card>
       <p slot="title" v-if="!flag">{{book.bookName}}</p>
       <p slot="title" v-if="flag"><input type="text" v-model="book.bookName"></p>
